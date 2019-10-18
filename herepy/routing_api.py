@@ -263,7 +263,10 @@ class RoutingApi(HEREApi):
                start_waypoints,
                destination_waypoints,
                departure='now',
-               modes=[]):
+               modes=[],
+               summary_attributes='distance',
+               truck_type='truck',
+               matrix_attributes='summary'):
         """Request a matrix of route summaries between M starts and N destinations.
         Args:
           start_waypoints (array):
@@ -283,7 +286,10 @@ class RoutingApi(HEREApi):
             'app_id': self._app_id,
             'app_code': self._app_code,
             'departure': departure,
-            'mode': self.__prepare_mode_values(modes)
+            'mode': self.__prepare_mode_values(modes),
+            'summaryAttributes': summary_attributes,
+            'truckType': truck_type,
+            'matrixAttributes': matrix_attributes,
         }
         for i, start_waypoint in enumerate(start_waypoints):
             data['start' + str(i)] = self.__array_to_waypoint(start_waypoint)
